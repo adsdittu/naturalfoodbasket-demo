@@ -10,15 +10,24 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 /* ... all your existing CSS ... */
 
-/* 🟢 TIDIO Z-INDEX FIX */
-#tidio-chat, .tidio-chat, .tidio-widget { 
-    z-index: 2147483000 !important; 
-    position: fixed !important; 
+/* ----- TIDIO CHAT FIX ----- */
+#tidio-chat, .tidio-chat, .tidio-widget, .tidio-chat-iframe {
+  z-index: 2147483647 !important;  /* Force it to float on top */
+  position: fixed !important;      /* Keeps it anchored to bottom-right */
 }
-.tidio-chat-iframe { 
-    z-index: 2147483001 !important; 
+
+body, html {
+  overflow: visible !important;    /* Prevent body from being hidden/locked */
+  height: auto !important;         /* Ensure full height rendering */
 }
-body { overflow: visible !important; }
+
+.tidio-chat iframe, iframe.tidio-chat {
+  position: fixed !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  max-height: 400px;
+}
+
 </style>
 
 <!-- TIDIO SCRIPT -->
@@ -93,6 +102,7 @@ body { overflow: visible !important; }
 </body>
     <script src="//code.tidio.co/ev6fcpyoz1r4yuux7kcyqzngpudotnlx.js" async></script>
 </html>
+
 
 
 
